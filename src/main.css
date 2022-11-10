@@ -14,5 +14,58 @@ body {
 
 #container {
   border: 4px solid black;
+  width: 80vw;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(6, 2fr);
+}
+
+#waterContainer {
+  grid-column: 1 / 6;
+  grid-row: 1;
   background: linear-gradient(to bottom, lightblue, darkblue, black);
+}
+
+#uiContainer {
+  background: rgb(209, 197, 197);
+  text-align: center;
+}
+
+#startHeadline {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: x-large;
+  color: black;
+}
+
+/* CSS */
+#createEnzymeButton {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Ubuntu, sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 80%;
+  /* margin-left: 10%; */
+  margin-top: 130%;
 }
