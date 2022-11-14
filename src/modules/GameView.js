@@ -5,16 +5,25 @@ class GameView {
     this.view = document.createElement('div');
     this.view.setAttribute('id', 'container');
     document.body.appendChild(this.view);
-    this.createEnzymeButton = document.createElement('button');
-    this.createEnzymeButton.setAttribute('id', 'createEnzymeButton');
-    this.createEnzymeButton.textContent = 'Create Enzyme';
     this.createUI();
   }
   createUI() {
     this.ui = document.createElement('div');
     this.ui.setAttribute('id', 'uiContainer');
     this.view.appendChild(this.ui);
-    this.ui.appendChild(this.createEnzymeButton);
+    this.createEnzymeButton = this.createButton(
+      'createEnzymeButton',
+      'Create Enzyme',
+      this.ui
+    );
+  }
+  createButton(buttonID, buttonText, parent) {
+    const button = document.createElement('button');
+    button.setAttribute('id', buttonID);
+    button.textContent = buttonText;
+    parent.appendChild(button);
+
+    return button;
   }
 }
 
