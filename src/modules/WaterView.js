@@ -5,5 +5,4 @@ class WaterView {
     gameview.view.appendChild(this.view);
   }
 }
-
 export { WaterView };

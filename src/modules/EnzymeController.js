@@ -1,7 +1,10 @@
+import { Enzyme } from './Enzyme.js';
+import { EnzymeView, ENZYMEVIEW } from './EnzymeView.js';
+
 class EnzymeController {
-  constructor() {
-    this.view = 'dummyView';
-    this.enzyme = 'dummyEnzyme';
+  constructor(water) {
+    this.view = ENZYMEVIEW;
+    this.enzyme = new Enzyme(water);
   }
 }
 

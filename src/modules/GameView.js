@@ -1,13 +1,13 @@
 import { WaterView } from './WaterView.js';
 
 class GameView {
-  constructor() {
+  constructor(waterTemperature, pH) {
     this.view = document.createElement('div');
     this.view.setAttribute('id', 'container');
     document.body.appendChild(this.view);
-    this.createUI();
+    this.createUI(waterTemperature);
   }
-  createUI() {
+  createUI(waterTemperature) {
     this.ui = document.createElement('div');
     this.ui.setAttribute('id', 'uiContainer');
     this.view.appendChild(this.ui);
@@ -16,6 +16,7 @@ class GameView {
       'Create Enzyme',
       this.ui
     );
+    this.temperatureSlider = this.createWaterSlider(waterTemperature);
   }
   createButton(buttonID, buttonText, parent) {
     const button = document.createElement('button');
@@ -24,6 +25,20 @@ class GameView {
     parent.appendChild(button);
 
     return button;
+  }
+  createSlider(sliderID, parent, min, max, value) {
+    const sliderContainer = document.createElement('div');
+    sliderContainer.setAttribute('id', sliderID);
+    parent.appendChild(sliderContainer);
+    const SliderInput = document.createElement('input');
+    SliderInput.setAttribute('min', min);
+    SliderInput.setAttribute('type', 'range');
+    SliderInput.setAttribute('max', max);
+    SliderInput.setAttribute('value', this.value);
+    sliderContainer.appendChild(SliderInput);
+  }
+  createWaterSlider(waterTemperature) {
+    this.createSlider('waterSlider', this.ui, -50, 50, waterTemperature);
   }
 }
 

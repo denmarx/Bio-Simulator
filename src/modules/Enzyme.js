@@ -1,6 +1,13 @@
+import { Water } from './Water.js';
+
 class Enzyme {
-  constructor() {
+  /**
+   *
+   * @param {Water} water
+   */
+  constructor(water) {
     this.aminoacids = 'dummyQueue';
+    this.water = water;
   }
 }
 

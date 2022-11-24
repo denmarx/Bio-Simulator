@@ -4,5 +4,6 @@ class EnzymeView extends Image {
     this.src = '../ressources/enzymeDummy.png';
   }
 }
+const ENZYMEVIEW = new EnzymeView();
 
-export { EnzymeView };
+export { EnzymeView, ENZYMEVIEW };
