@@ -8,8 +8,7 @@ class GameController {
     (this.game = game), (this.gameview = new GameView(TEMPERATUR, PH));
     this.watercontroller = new WaterController(this.gameview);
     this.bindButton(this.gameview.createEnzymeButton);
-
-    this;
+    this.bindTemperatureSlider();
   }
   bindButton(button) {
     button.addEventListener('click', (e) =>
@@ -20,6 +19,20 @@ class GameController {
         this.watercontroller.water.addEnzyme();
         parent.appendChild(enzymeController.view);
       })(this.watercontroller.waterview.view)
+    );
+  }
+  bindSlider(slider, fun) {
+    slider.addEventListener('change', fun);
+  }
+  bindTemperatureSlider() {
+    // this.bindSlider(
+    //   this.gameview.temperatureSlider,
+    //   this.watercontroller.setTemperature(this.gameview.temperatureSlider.value)
+    // );
+    this.gameview.temperatureSlider.addEventListener('change', (e) =>
+      ((watercontroller) => {
+        watercontroller.setTemperature(this.gameview.temperatureSlider.value);
+      })(this.watercontroller)
     );
   }
 }

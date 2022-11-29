@@ -9,6 +9,7 @@ class Enzyme {
     this.aminoacids = 'dummyQueue';
     this.water = water;
   }
+  denaturate() {}
 }
 
 export { Enzyme };

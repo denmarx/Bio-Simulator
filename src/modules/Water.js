@@ -11,5 +11,8 @@ class Water {
   addEnzyme(enzyme) {
     this.enzymes.push(enzyme);
   }
+  setTemperature(newTemp) {
+    this.temperatur = newTemp;
+  }
 }
 export { Water };

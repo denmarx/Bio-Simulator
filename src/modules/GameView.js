@@ -34,11 +34,12 @@ class GameView {
     SliderInput.setAttribute('min', min);
     SliderInput.setAttribute('type', 'range');
     SliderInput.setAttribute('max', max);
-    SliderInput.setAttribute('value', this.value);
+    SliderInput.setAttribute('value', value);
     sliderContainer.appendChild(SliderInput);
+    return SliderInput;
   }
   createWaterSlider(waterTemperature) {
-    this.createSlider('waterSlider', this.ui, -50, 50, waterTemperature);
+    return this.createSlider('waterSlider', this.ui, -50, 50, waterTemperature);
   }
 }
 

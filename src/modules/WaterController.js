@@ -9,6 +9,10 @@ class WaterController {
     this.waterview = new WaterView(gameview);
     this.water = new Water(TEMPERATUR, PH);
   }
+  setTemperature(newTemp) {
+    this.water.setTemperature(newTemp);
+    console.log(newTemp);
+  }
 }
 
 export { WaterController, TEMPERATUR, PH };
