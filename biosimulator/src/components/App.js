@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './App.css';
 import Slider from '../components/Slider';
 
 export default class App extends React.Component {
   state = {};
+  //waterSliderRef = useRef();
 
-  handleWaterSlider = (value) => {
-    console.log(value);
+  handleWaterSlider = (e) => {
+    console.log(e);
   };
 
   render() {
@@ -17,7 +18,7 @@ export default class App extends React.Component {
           <div>
             <Slider
               name="waterSlider"
-              min={50}
+              min={-50}
               max={50}
               value={20}
               changeHandler={this.handleWaterSlider}

@@ -11,8 +11,10 @@ export default class Slider extends React.Component {
     changeHandler: PropTypes.func,
   };
 
-  handleChange = () => {
-    this.props.changeHandler(this.props.value);
+  handleChange = (e) => {
+    const newValue = e.target._valueTracker.getValue()
+    this.value = newValue
+    this.props.changeHandler(this.value);
   };
 
   // TODO: Render changed value to GUI
