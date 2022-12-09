@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import './App.css';
 import Slider from '../components/Slider';
 
@@ -20,7 +20,7 @@ export default class App extends React.Component {
               name="waterSlider"
               min={-50}
               max={50}
-              value={20}
+              startValue={20}
               changeHandler={this.handleWaterSlider}
             />
           </div>
