@@ -1,13 +1,20 @@
 import React from 'react';
 import './App.css';
 import Slider from '../components/Slider';
+import Water from '../components/Water';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.waterRef = React.createRef();
+  }
+
   state = {};
   //waterSliderRef = useRef();
 
   handleWaterSlider = (e) => {
     console.log(e);
+    this.waterRef.current.setState({ temp: e });
   };
 
   render() {
@@ -25,7 +32,7 @@ export default class App extends React.Component {
             />
           </div>
         </div>
-        <div className="waterContainer"></div>
+        <Water startTemp={20} ref={this.waterRef} />
       </div>
     );
   }
