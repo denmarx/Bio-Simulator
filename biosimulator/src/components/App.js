@@ -24,23 +24,34 @@ export default class App extends React.Component {
     this.phRef.current.setState({ ph: e });
   };
 
+  enzymeBtnClicked = () => {
+    this.waterRef.current.addEnzyme();
+    console.log(this.waterRef.current.state.enzymes);
+    // this.waterRef.current.setState({enzymes: this.waterRef.state.enzymes})
+  };
+
   render() {
     return (
       <div className="bosstainer">
         <div className="uiContainer">
-          <button className="createEnzymeButton">Create Enzyme</button>
+          <button
+            className="createEnzymeButton"
+            onClick={this.enzymeBtnClicked}
+          >
+            Create Enzyme
+          </button>
           <Slider
             name="tempSlider"
-            min={-50}
-            max={50}
+            min={-51}
+            max={51}
             startValue={20}
             changeHandler={this.handleWaterSlider}
             desc="Temperature"
           />
           <Slider
             name="phSlider"
-            min={0}
-            max={14}
+            min={-1}
+            max={15}
             startValue={7}
             changeHandler={this.handlePhSlider}
             desc="pH"
