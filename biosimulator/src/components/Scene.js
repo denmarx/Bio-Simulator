@@ -21,7 +21,7 @@ export default class Scene extends React.Component {
     });
 
     var render = Render.create({
-      element: this.refs.scene,
+      element: this.scene,
       engine: engine,
       options: {
         // width: 600,
@@ -63,7 +63,15 @@ export default class Scene extends React.Component {
     Runner.run(engine);
 
     Render.run(render);
+    /*
+    1. wir müssen gucken wie wir die größe vom canvas auf den Container zuschneiden
+    2. wir müssen die Wasserteilchen mit Logik hinterlegen
+    */
   }
+
+
+
+  
   render() {
     return <div className="sceneScreen" ref="scene" />;
   }

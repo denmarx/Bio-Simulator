@@ -34,7 +34,6 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Scene />
         <div className="bosstainer">
           <div className="uiContainer">
             <button

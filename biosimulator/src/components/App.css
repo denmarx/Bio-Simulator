@@ -18,7 +18,7 @@
 .waterContainer {
   grid-column: 1 / 6;
   grid-row: 1;
-  background: linear-gradient(to bottom, lightblue, darkblue, black);
+  /*background: linear-gradient(to bottom, lightblue, darkblue, black);*/
 }
 
 .phContainer {
