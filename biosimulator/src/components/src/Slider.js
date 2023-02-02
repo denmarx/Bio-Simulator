@@ -1,5 +1,5 @@
 import React from 'react';
-import './Slider.css';
+import '../ressources/styles/Slider.css';
 import PropTypes from 'prop-types';
 
 export default class Slider extends React.Component {

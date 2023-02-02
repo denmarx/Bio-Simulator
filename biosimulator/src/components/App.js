@@ -1,9 +1,8 @@
 import React from 'react';
-import './App.css';
-import Slider from '../components/Slider';
-import Water from '../components/Water';
-import Ph from '../components/Ph';
-import Scene from './Scene';
+import './ressources/styles/App.css';
+import Slider from './src/Slider';
+import Water from './src/Water';
+import Ph from './src/Ph';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -22,7 +21,7 @@ export default class App extends React.Component {
 
   handlePhSlider = (e) => {
     console.log(e);
-    this.phRef.current.setState({ ph: e });
+    this.waterRef.current.setState({ ph: e });
   };
 
   enzymeBtnClicked = () => {
@@ -60,12 +59,13 @@ export default class App extends React.Component {
             />
           </div>
           <Water
-            title="Temperature: "
+            tempTitle="Temperature: "
             startTemp={20}
             ref={this.waterRef}
-            unit="°C"
+            tempUnit="°C"
+            phTitle="pH: "
+            startPh={7}
           />
-          <Ph title="pH: " startPh={7} ref={this.phRef} />
         </div>
       </div>
     );
