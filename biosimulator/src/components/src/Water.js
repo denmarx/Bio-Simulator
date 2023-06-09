@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import '../ressources/styles/App.css';
 import '../ressources/styles/Water.css';
@@ -11,6 +11,7 @@ export default class Water extends React.Component {
     this.canvasRef = React.createRef();
     this.containerRef = React.createRef();
     this.engine = Matter.Engine.create({});
+    this.engine.gravity.scale = 0;
     this.renderM = Matter.Render.create({
       canvas: this.canvasRef.current,
       element: this.containerRef.current,
@@ -37,7 +38,7 @@ export default class Water extends React.Component {
   };
 
   componentDidMount() {
-    this.engine = Matter.Engine.create({ options: { gravity: 0 } });
+    // this.engine = Matter.Engine.create({ options: { gravity: 0 } });
     this.renderM = Matter.Render.create({
       canvas: this.canvasRef.current,
       element: this.containerRef.current,
@@ -49,16 +50,47 @@ export default class Water extends React.Component {
     this.world = this.engine.world;
     //this.engine.gravity = 0
 
+    var borderThickness = 40;
+
     var ground = Matter.Bodies.rectangle(
       this.canvasRef.current.width / 2,
       this.canvasRef.current.height - 10,
       this.renderM.canvas.width,
-      40,
+      borderThickness,
       { isStatic: true }
     );
     Matter.World.add(this.world, ground);
 
-    //Matter.World.add(this.engine.world, []);
+    var upperBorder = Matter.Bodies.rectangle(
+      this.canvasRef.current.width / 2,
+      0,
+      this.renderM.canvas.width,
+      borderThickness,
+      { isStatic: true }
+    );
+    Matter.World.add(this.world, upperBorder);
+
+    var leftBorder = Matter.Bodies.rectangle(
+      10,
+      this.canvasRef.current.height / 2,
+      borderThickness,
+      this.canvasRef.current.height,
+      { isStatic: true }
+    );
+    Matter.World.add(this.world, leftBorder);
+
+    var rightBorder = Matter.Bodies.rectangle(
+      this.canvasRef.current.width - 10,
+      this.canvasRef.current.height / 2,
+      borderThickness,
+      this.canvasRef.current.height,
+      { isStatic: true }
+    );
+    Matter.World.add(this.world, rightBorder);
+
+    for (let i = 0; i < 200; i++) {
+      this.addWaterParticles();
+    }
 
     Runner.run(this.engine);
     Render.run(this.renderM);
@@ -75,6 +107,37 @@ export default class Water extends React.Component {
     );
     //Matter.World.remove
     //this.state.World.add(this.state.world, this.state.Bodies.circle(150, 50, 30, { restitution: 0.7 }));
+  };
+
+  addWaterParticles = () => {
+    let x = Math.floor(Math.random() * this.canvasRef.current.width);
+    if (x <= 10) {
+      x = 11;
+    }
+    if (x >= this.canvasRef.current.width - 10) {
+      x = this.canvasRef.current.width - 11;
+    }
+    let y = Math.floor(Math.random() * this.canvasRef.current.height);
+    if (y <= 10) {
+      y = 11;
+    }
+    if (y >= this.canvasRef.current.height - 10) {
+      y = this.canvasRef.current.height - 11;
+    }
+    const particle = Matter.Bodies.circle(x, y, 5, {
+      restitution: 1,
+      friction: 0,
+      frictionAir: 0,
+    });
+    Matter.Body.setInertia(particle, Infinity);
+    Matter.World.add(this.world, particle);
+    // Find a random direction, in radians
+    const direction = Math.random() * Math.PI * 2;
+
+    Matter.Body.setVelocity(particle, {
+      x: Math.sin(direction) * 2,
+      y: Math.cos(direction) * 2,
+    });
   };
 
   render() {
