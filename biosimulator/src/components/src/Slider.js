@@ -1,38 +1,33 @@
 import React from 'react';
-import '../ressources/styles/Slider.css';
 import PropTypes from 'prop-types';
 
-export default class Slider extends React.Component {
-  PropTypes = {
-    name: PropTypes.string,
-    min: PropTypes.number,
-    startValue: PropTypes.number,
-    max: PropTypes.number,
-    changeHandler: PropTypes.func,
-    desc: PropTypes.string,
+const Slider = ({ label, min, max, value, onChange }) => {
+  const handleChange = (e) => {
+    onChange(parseFloat(e.target.value));
   };
 
-  state = {
-    value: this.props.startValue,
-  };
+  return (
+    <div className="slider">
+      <label>{label}</label>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={1}
+        value={value}
+        onChange={handleChange}
+      />
+      <span>{value}</span>
+    </div>
+  );
+};
 
-  handleChange = (e) => {
-    this.setState({ value: e.target._valueTracker.getValue() });
-    this.props.changeHandler(this.state.value);
-  };
+Slider.propTypes = {
+  label: PropTypes.string.isRequired,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
-  render() {
-    return (
-      <div className={this.props.name}>
-        <input
-          type="range"
-          min={this.props.min}
-          value={this.state.value}
-          max={this.props.max}
-          onChange={this.handleChange}
-        ></input>
-        <div> {this.props.desc}</div>
-      </div>
-    );
-  }
-}
+export default Slider;

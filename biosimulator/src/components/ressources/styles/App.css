@@ -1,92 +1,48 @@
-* {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 103%;
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.centered-container {
+  display: flex;
+  align-items: center;
 }
 
-:root {
-  --bosstainer-columns: 6;
-  --bosstainer-width: 80vw;
-  --watercontainer-rows: 2;
-}
-
-/* .sceneScreen {
-  display: grid;
-} */
-
-.bosstainer {
-  display: grid;
-  border: 4px solid black;
-  width: var(--bosstainer-width);
-  height: var(--bosstainer-height);
-  grid-template-columns: repeat(var(--bosstainer-columns), 2fr);
-}
-
-.waterContainer {
-  display: grid;
-  grid-column: 1 / var(--bosstainer-columns);
-  grid-row: 1;
-  grid-template-rows: repeat(var(--watercontainer-rows));
-}
-
-.waterWorld {
-  /* grid-row: 1/ (var(--watercontainer-rows)); */
-  grid-row: 2 / var(--watercontainer-rows);
-  grid-column: 1;
-}
-
-.valueDisplay {
-  grid-row: 1 / var(--watercontainer-rows);
-  grid-column: 1;
-}
-
-/* .phContainer {
-  grid-column: 2 / var(--bosstainer-columns);
-  grid-row: 1;
-} */
-
-.uiContainer {
-  background: rgb(209, 197, 197);
-  text-align: center;
+.controls-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 20px; */
+  height: 100%;
+  background-color: #f1f1f1;
+  flex: 0 0 auto;
 }
 
-.createEnzymeButton {
-  backface-visibility: hidden;
-  background-color: #405cf5;
-  border-radius: 6px;
-  border-width: 0;
-  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
-    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-family: -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Ubuntu, sans-serif;
-  font-size: 100%;
-  height: 44px;
-  line-height: 1.15;
-  margin: 12px 0 0;
-  outline: none;
-  overflow: hidden;
-  padding: 0 25px;
-  position: relative;
-  text-transform: none;
-  transform: translateZ(0);
-  transition: all 0.2s, box-shadow 0.08s ease-in;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: 80%;
-  right: -8%;
-  margin-bottom: 150%;
+.slider {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.tempSlider {
-  margin-bottom: 10%;
+.slider label {
+  margin-right: 10px;
+  font-weight: bold;
 }
 
-.phSlider {
-  margin-bottom: 5%;
+.button {
+  margin-top: 10px;
+}
+
+.canvas-container {
+  /* position: relative;
+  flex: 1; */
+}
+
+.waterCanvas {
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #ccc;
+  height: 100%;
 }
