@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import '../ressources/styles/App.css';
 import Matter from 'matter-js';
 
@@ -8,8 +7,6 @@ const Water = ({ tempTitle, startTemp, tempUnit, phTitle, startPh }) => {
   const containerRef = useRef(null);
   const [temp, setTemp] = useState(startTemp);
   const [ph, setPh] = useState(startPh);
-  const [engine, setEngine] = useState(null);
-  const [renderM, setRenderM] = useState(null);
   const [world, setWorld] = useState(null);
 
   useEffect(() => {
@@ -71,8 +68,6 @@ const Water = ({ tempTitle, startTemp, tempUnit, phTitle, startPh }) => {
     Matter.Runner.run(engine);
     Matter.Render.run(render);
 
-    setEngine(engine);
-    setRenderM(render);
     setWorld(world);
 
     return () => {
@@ -134,14 +129,6 @@ const Water = ({ tempTitle, startTemp, tempUnit, phTitle, startPh }) => {
       <canvas className="waterWorld" ref={canvasRef} />
     </div>
   );
-};
-
-Water.propTypes = {
-  tempTitle: PropTypes.string,
-  startTemp: PropTypes.number,
-  tempUnit: PropTypes.string,
-  phTitle: PropTypes.string,
-  startPh: PropTypes.number,
 };
 
 export default Water;

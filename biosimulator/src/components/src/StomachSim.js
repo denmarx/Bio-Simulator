@@ -1,12 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import '../ressources/styles/App.css';
-import Matter from 'matter-js';
-import Slider from './Slider';
+import React, { useState } from 'react';
 import Water from './Water';
+import Slider from './Slider';
+import '../ressources/styles/App.css';
 
-const App = () => {
-  const canvasRef = useRef(null);
+const StomachSim = () => {
+  // This is array destructuring. It's used to assign values from an array to individual variables
+  //  useState to introduce state into a functional component
   const [temp, setTemp] = useState(20);
   const [ph, setPh] = useState(7);
 
@@ -17,35 +16,6 @@ const App = () => {
   const handlePhSlider = (value) => {
     setPh(value);
   };
-
-  useEffect(() => {
-    const engine = Matter.Engine.create();
-    const world = engine.world;
-    engine.gravity.scale = 0;
-
-    const render = Matter.Render.create({
-      canvas: canvasRef.current,
-      engine: engine,
-      options: {
-        width: 800,
-        height: 600,
-        wireframes: false,
-      },
-    });
-
-    const ground = Matter.Bodies.rectangle(400, 600, 800, 40, {
-      isStatic: true,
-    });
-    Matter.World.add(world, ground);
-
-    Matter.Runner.run(engine);
-    Matter.Render.run(render);
-
-    return () => {
-      Matter.Render.stop(render);
-      Matter.Engine.clear(engine);
-    };
-  }, []);
 
   return (
     <div className="App">
@@ -81,4 +51,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default StomachSim;
