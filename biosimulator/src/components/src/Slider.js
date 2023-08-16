@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Slider is arrow function which takes one object with properties
 const Slider = ({ label, min, max, value, onChange }) => {
   const handleChange = (e) => {
     onChange(parseFloat(e.target.value));
