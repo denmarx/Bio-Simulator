@@ -48,7 +48,16 @@ const StomachSim = () => {
             startPh={ph}
           />
         </div>
-
+      </div>
+      <div className="side-container">
+        <div className="text-container">
+          <p>
+            You are in the stomach. <br></br> In order to learn about enzymes in
+            digestion, <br></br>select parameters which correspond to<br></br>{' '}
+            this environment. Then add nutrients by<br></br> clicking on the
+            button and pay attention to which <br></br> nutrients are digested.
+          </p>
+        </div>
         <div className="controls-container">
           <Slider
             label="Temperature"

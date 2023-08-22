@@ -4,7 +4,6 @@ import Matter from 'matter-js';
 
 // Constants for magic numbers
 const NUM_WATER_PARTICLES = 100;
-const MIN_Y_BORDER = 10;
 
 // Custom hook to manage water particles
 const useWaterParticles = (world, canvasRef) => {
@@ -16,9 +15,6 @@ const useWaterParticles = (world, canvasRef) => {
     for (let i = 0; i < NUM_WATER_PARTICLES; i++) {
       let x = Math.floor(Math.random() * canvasRef.current.width);
       let y = Math.floor(Math.random() * canvasRef.current.height);
-
-      y = Math.max(y, MIN_Y_BORDER);
-      y = Math.min(y, canvasRef.current.height - MIN_Y_BORDER);
 
       const particle = Matter.Bodies.circle(x, y, 5, {
         restitution: 1,
@@ -38,8 +34,6 @@ const useWaterParticles = (world, canvasRef) => {
 
     setParticles(particleArray);
   };
-
-  // const resetWaterParticles = () => {
   //   particles.forEach((particle) => {
   //     Matter.World.remove(world, particle);
   //   });
@@ -53,6 +47,7 @@ const useWaterParticles = (world, canvasRef) => {
   return { particles };
 };
 
+// Water engine
 const Water = ({
   world,
   engine,
@@ -66,45 +61,7 @@ const Water = ({
   const containerRef = useRef(null);
   const [temp, setTemp] = useState(startTemp);
   const [ph, setPh] = useState(startPh);
-  const { resetWaterParticles } = useWaterParticles(world, canvasRef);
-
-  //   for (let i = 0; i < 200; i++) {
-  //     let x = Math.floor(Math.random() * canvasRef.current.width);
-  //     let y = Math.floor(Math.random() * canvasRef.current.height);
-  //     if (y <= 10) {
-  //       y = 11;
-  //     }
-  //     if (y >= canvasRef.current.height - 10) {
-  //       y = canvasRef.current.height - 11;
-  //     }
-  //     const particle = Matter.Bodies.circle(x, y, 5, {
-  //       restitution: 1,
-  //       friction: 0,
-  //       frictionAir: 0,
-  //     });
-  //     Matter.Body.setInertia(particle, Infinity);
-  //     Matter.World.add(world, particle);
-  //     const direction = Math.random() * Math.PI * 2;
-  //     Matter.Body.setVelocity(particle, {
-  //       x: Math.sin(direction) * 2,
-  //       y: Math.cos(direction) * 2,
-  //     });
-  //     particleArray.push(particle); // Store the particle in the array
-  //   }
-
-  //   setParticles(particleArray); // Set the particles state with the newly created particles
-  // };
-
-  // const resetWaterParticles = () => {
-  //   // Remove existing particles from the world
-  //   particles.forEach((particle) => {
-  //     Matter.World.remove(world, particle);
-  //   });
-
-  //   // Re-initialize the particles
-  //   addWaterParticles(world);
-  // };
-
+  useWaterParticles(world, canvasRef);
   useEffect(() => {
     const render = Matter.Render.create({
       canvas: canvasRef.current,
