@@ -95,6 +95,9 @@ const StomachSim = () => {
             Create Enzyme
           </button>
         </div>
+        <div className='text-container'>
+          <p>Feedback Text</p>
+        </div>
       </div>
     </div>
   );
