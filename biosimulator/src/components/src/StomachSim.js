@@ -46,6 +46,7 @@ const StomachSim = () => {
             tempUnit="°C"
             phTitle="pH"
             startPh={ph}
+            temperature={temp}
           />
         </div>
       </div>
@@ -95,7 +96,7 @@ const StomachSim = () => {
             Create Enzyme
           </button>
         </div>
-        <div className='text-container'>
+        <div className="text-container">
           <p>Feedback Text</p>
         </div>
       </div>
