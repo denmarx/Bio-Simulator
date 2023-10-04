@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../ressources/styles/App.css';
 import Matter from 'matter-js';
+import Slider from './Slider';
 
 // Constants for magic numbers
-const NUM_WATER_PARTICLES = 100;
+const NUM_WATER_PARTICLES = 200;
 
 // Custom hook to manage water particles
 const useWaterParticles = (world, canvasRef) => {
@@ -20,12 +21,15 @@ const useWaterParticles = (world, canvasRef) => {
         restitution: 1,
         friction: 0,
         frictionAir: 0,
+        render: {
+          fillStyle: "blue",
+        }
       });
       Matter.Body.setInertia(particle, Infinity);
       const direction = Math.random() * Math.PI * 2;
       Matter.Body.setVelocity(particle, {
-        x: Math.sin(direction) * 2,
-        y: Math.cos(direction) * 2,
+        x: Math.sin(direction) * 5,
+        y: Math.cos(direction) * 5,
       });
 
       Matter.World.add(world, particle);
@@ -34,11 +38,6 @@ const useWaterParticles = (world, canvasRef) => {
 
     setParticles(particleArray);
   };
-  //   particles.forEach((particle) => {
-  //     Matter.World.remove(world, particle);
-  //   });
-  //   addWaterParticles();
-  // };
 
   useEffect(() => {
     addWaterParticles();
