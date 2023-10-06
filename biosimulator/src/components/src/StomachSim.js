@@ -23,15 +23,12 @@ const StomachSim = () => {
     spawnNutrients(nutrientType, 100, 100, world);
   };
 
+  // updates engine while running
   useEffect(() => {
     const runner = Matter.Runner.create();
     Matter.Runner.run(runner, engine);
+    // water particles will fly off canvas without this
     engine.gravity.scale = 0;
-
-    return () => {
-      Matter.Runner.stop(runner);
-      Matter.Engine.clear(engine);
-    };
   }, [engine]);
 
   return (
