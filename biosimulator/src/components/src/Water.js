@@ -1,10 +1,12 @@
-import React, { useEffect, useInsertionEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../ressources/styles/App.css';
 import Matter from 'matter-js';
 
 // Constants for magic numbers
 const NUM_WATER_PARTICLES = 200;
 const AMINO_DISTANCE = 60;
+const MAX_PARTICLES_PER_AMINO = 10;
+const THRESHOLD = 0;
 
 // Custom hook to manage water particles
 const useWaterParticles = (world, canvasRef, temperature) => {
@@ -53,59 +55,81 @@ const useWaterParticles = (world, canvasRef, temperature) => {
     // dependency arrays
   }, [temperature, particles]);
 
-  return { particles };
+  return particles;
 };
 
-const createAminoAcidChain = (world, canvasRef) => {
-  let chain = [];
-  let prevCircle = null; // keep track of previous amino acid
-  for (let i = 1; i <= 7; i++) {
-    const x = canvasRef.current.width;
-    const y = canvasRef.current.height * 3.5 - i * AMINO_DISTANCE;
-    const circle = Matter.Bodies.circle(x, y, 20, {
-      render: {
-        fillStyle: 'red',
-      },
-      restitution: 0.9,
-      friction: 0.1,
-      density: 0.04,
-    });
-    Matter.World.add(world, circle);
-    chain.push(circle);
+// const createAminoAcidChain = (world, canvasRef) => {
+//   let chain = [];
+//   let prevCircle = null; // keep track of previous amino acid
+//   for (let i = 1; i <= 7; i++) {
+//     const x = canvasRef.current.width;
+//     const y = canvasRef.current.height * 3.5 - i * AMINO_DISTANCE;
+//     console.log(canvasRef.current.height);
+//     const circle = Matter.Bodies.circle(x, y, 20, {
+//       render: {
+//         fillStyle: 'red',
+//       },
+//       restitution: 0.9,
+//       friction: 0.1,
+//       density: 0.04,
+//       hydropathy: Math.random() * 10, // Random hydropathy value between 0 and 10
+//     });
+//     Matter.World.add(world, circle);
+//     chain.push(circle);
 
-    if (i > 1) {
-      const constraint = Matter.Constraint.create({
-        bodyA: prevCircle,
-        bodyB: circle,
-        stiffness: 0.9,
-      });
-      Matter.World.add(world, constraint);
-    }
-    prevCircle = circle;
-  }
-  return chain;
+//     if (i > 1) {
+//       const constraint = Matter.Constraint.create({
+//         bodyA: prevCircle,
+//         bodyB: circle,
+//         stiffness: 0.9,
+//         render: {
+//           lineWidth: 2,
+//           anchors: true,
+//           type: 'line',
+//         },
+//       });
+//       Matter.World.add(world, constraint);
+//     }
+//     prevCircle = circle;
+//   }
+//   return chain;
+// };
+
+const attractWaterParticles = (aminoAcids, particles, world) => {
+  aminoAcids.forEach((amino) => {
+    let attractedParticles = 0; // Counter for the number of particles an amino acid has attracted
+    particles.forEach((particle) => {
+      const distance = Matter.Vector.magnitude(Matter.Vector.sub(amino.position, particle.position));
+      if (distance < 100 && attractedParticles < MAX_PARTICLES_PER_AMINO && amino.hydropathy > THRESHOLD) {
+        // Only attract particles within a certain radius and below the max limit
+        // Also, only attract if the amino acid's hydropathy is above a certain threshold
+        // const constraint = Matter.Constraint.create({
+        //   bodyA: amino,
+        //   bodyB: particle,
+        //   stiffness: 0.05,
+        //   render: {
+        //     visible: false,
+        //   },
+        // });
+        Matter.World.add(world);
+        attractedParticles++;
+      }
+    });
+  });
 };
 
 // Water engine
-const Water = ({
-  world,
-  engine,
-  tempTitle,
-  startTemp,
-  tempUnit,
-  phTitle,
-  startPh,
-  temperature,
-}) => {
+const Water = ({ world, engine, tempTitle, startTemp, tempUnit, phTitle, startPh, temperature }) => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const [temp, setTemp] = useState(startTemp);
   const [ph, setPh] = useState(startPh);
-
-  useWaterParticles(world, canvasRef, temperature);
+  // const particles = useWaterParticles(world, canvasRef, temperature);
   useEffect(() => {
-    createAminoAcidChain(world, canvasRef);
-  }, [world, canvasRef, temperature]);
+    // const chain = createAminoAcidChain(world, canvasRef);
+    // setAminoAcidChain(chain);
+    // attractWaterParticles(chain, particles, world);
+  }, [world, canvasRef]);
 
   // renders canvas borders
   useEffect(() => {
@@ -129,13 +153,9 @@ const Water = ({
     );
     Matter.World.add(world, ground);
 
-    const upperBorder = Matter.Bodies.rectangle(
-      canvasRef.current.width / 2,
-      0,
-      render.canvas.width,
-      borderThickness,
-      { isStatic: true }
-    );
+    const upperBorder = Matter.Bodies.rectangle(canvasRef.current.width / 2, 0, render.canvas.width, borderThickness, {
+      isStatic: true,
+    });
     Matter.World.add(world, upperBorder);
 
     const leftBorder = Matter.Bodies.rectangle(
@@ -174,12 +194,12 @@ const Water = ({
   }, [startPh]);
 
   return (
-    <div className="waterContainer" ref={containerRef}>
-      <div className="valueDisplay">
+    <div className='waterContainer' ref={containerRef}>
+      <div className='valueDisplay'>
         {tempTitle} {temp} {tempUnit} {phTitle} {ph}
       </div>
 
-      <canvas className="waterWorld" ref={canvasRef} />
+      <canvas className='waterWorld' ref={canvasRef} />
     </div>
   );
 };

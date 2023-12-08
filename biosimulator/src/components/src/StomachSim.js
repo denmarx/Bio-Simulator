@@ -20,7 +20,7 @@ const StomachSim = () => {
   };
 
   const handleNutrientButtonClick = (nutrientType) => () => {
-    spawnNutrients(nutrientType, 100, 100, world);
+    spawnNutrients(nutrientType, 500, 500, world);
   };
 
   // updates engine while running
@@ -32,68 +32,46 @@ const StomachSim = () => {
   }, [engine]);
 
   return (
-    <div className="App">
-      <div className="centered-container">
-        <div className="canvas-container">
+    <div className='App'>
+      <div className='centered-container'>
+        <div className='canvas-container'>
           <Water
             world={world}
             engine={engine}
-            tempTitle="Temperature"
+            tempTitle='Temperature'
             startTemp={temp}
-            tempUnit="°C"
-            phTitle="pH"
+            tempUnit='°C'
+            phTitle='pH'
             startPh={ph}
             temperature={temp}
           />
         </div>
       </div>
-      <div className="side-container">
-        <div className="text-container">
+      <div className='side-container'>
+        <div className='text-container'>
           <p>
-            You are in the stomach. <br></br> In order to learn about enzymes in
-            digestion, <br></br>select parameters which correspond to<br></br>{' '}
-            this environment. Then add nutrients by<br></br> clicking on the
-            button and pay attention to which <br></br> nutrients are digested.
+            You are in the stomach. <br></br> In order to learn about enzymes in digestion, <br></br>select parameters
+            which correspond to<br></br> this environment. Then add nutrients by<br></br> clicking on the button and pay
+            attention to which <br></br> nutrients are digested.
           </p>
         </div>
-        <div className="controls-container">
-          <Slider
-            label="Temperature"
-            min={-51}
-            max={51}
-            value={temp}
-            onChange={handleWaterSlider}
-          />
-          <Slider
-            label="pH"
-            min={-1}
-            max={15}
-            value={ph}
-            onChange={handlePhSlider}
-          />
-          <button
-            className="button"
-            onClick={handleNutrientButtonClick('carbohydrates')}
-          >
+        <div className='controls-container'>
+          <Slider label='Temperature' min={-5} max={37} value={temp} onChange={handleWaterSlider} />
+          <Slider label='pH' min={-1} max={15} value={ph} onChange={handlePhSlider} />
+          <button className='button' onClick={handleNutrientButtonClick('carbohydrates')}>
             Add Carbohydrates
           </button>
-          <button
-            className="button"
-            onClick={handleNutrientButtonClick('proteins')}
-          >
+          <button className='button' onClick={handleNutrientButtonClick('proteins')}>
             Add Proteins
           </button>
-          <button
-            className="button"
-            onClick={handleNutrientButtonClick('lipids')}
-          >
+          <button className='button' onClick={handleNutrientButtonClick('lipids')}>
             Add Lipids
           </button>
-          <button className="button" onClick={alert}>
+          <button className='button' onClick={alert}>
             Create Enzyme
           </button>
         </div>
-        <div className="text-container">
+        <div className='text-container'>
           <p>Feedback Text</p>
         </div>
       </div>
