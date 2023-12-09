@@ -1,9 +1,20 @@
-import React from 'react';
+import Matter from 'matter-js';
 
-export default class Enzyme extends React.Component {
-  render() {
-    return (
-      <img src={require('../ressources/images/images.png')} alt="Enzyme" />
-    );
+const spawnEnzyme = (enzymeType, x, y, world) => {
+  let enzyme;
+
+  switch (enzymeType) {
+    case 'enzyme':
+      enzyme = Matter.Bodies.polygon(x, y, 10, 40, {
+        render: {
+          fillStyle: 'orange',
+        },
+      });
+      break;
+    default:
+      break;
   }
-}
+  Matter.World.add(world, enzyme);
+};
+
+export default spawnEnzyme;

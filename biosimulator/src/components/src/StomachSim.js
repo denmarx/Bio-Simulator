@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Water from './Water';
 import Slider from './Slider';
 import spawnNutrients from './NutrientsUtils';
+import spawnEnzyme from './Enzyme';
 import '../ressources/styles/App.css';
 import Matter from 'matter-js';
 
@@ -20,7 +21,11 @@ const StomachSim = () => {
   };
 
   const handleNutrientButtonClick = (nutrientType) => () => {
-    spawnNutrients(nutrientType, 500, 500, world);
+    spawnNutrients(nutrientType, 250, 250, world);
+  };
+
+  const handleEnzymeButtonClick = (enzymeType) => () => {
+    spawnEnzyme(enzymeType, 300, 300, world);
   };
 
   // updates engine while running
@@ -67,7 +72,7 @@ const StomachSim = () => {
           <button className='button' onClick={handleNutrientButtonClick('lipids')}>
             Add Lipids
           </button>
-          <button className='button' onClick={alert}>
+          <button className='button' onClick={handleEnzymeButtonClick('enzyme')}>
             Create Enzyme
           </button>
         </div>

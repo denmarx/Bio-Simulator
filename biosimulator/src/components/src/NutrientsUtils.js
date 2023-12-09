@@ -1,4 +1,5 @@
 import Matter from 'matter-js';
+import { Constraint } from 'matter-js';
 
 const spawnNutrients = (nutrientType, x, y, world) => {
   let nutrient;
@@ -12,9 +13,7 @@ const spawnNutrients = (nutrientType, x, y, world) => {
       vertices.push({ x: vertexX * 2, y: vertexY });
     }
 
-    return Matter.Bodies.fromVertices(x, y, [vertices], {
-      // Additional options for the body
-    });
+    return Matter.Bodies.fromVertices(x, y, [vertices], {});
   };
 
   switch (nutrientType) {
@@ -39,6 +38,7 @@ const spawnNutrients = (nutrientType, x, y, world) => {
           fillStyle: 'green',
         },
       });
+
       break;
     default:
       break;
