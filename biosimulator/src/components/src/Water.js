@@ -124,7 +124,7 @@ const Water = ({ world, engine, tempTitle, startTemp, tempUnit, phTitle, startPh
   const containerRef = useRef(null);
   const [temp, setTemp] = useState(startTemp);
   const [ph, setPh] = useState(startPh);
-  // const particles = useWaterParticles(world, canvasRef, temperature);
+  const particles = useWaterParticles(world, canvasRef, temperature);
   useEffect(() => {
     // const chain = createAminoAcidChain(world, canvasRef);
     // setAminoAcidChain(chain);
