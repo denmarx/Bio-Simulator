@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import StomachSimulation from './src/simulations/StomachSimulation';
+import StomachSimulation from './simulations/StomachSimulation';
 
 export default function App() {
   return (
