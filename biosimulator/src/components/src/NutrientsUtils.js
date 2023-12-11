@@ -1,5 +1,4 @@
 import Matter from 'matter-js';
-import { Constraint } from 'matter-js';
 
 const spawnNutrients = (nutrientType, x, y, world) => {
   let nutrient;
@@ -19,11 +18,6 @@ const spawnNutrients = (nutrientType, x, y, world) => {
   switch (nutrientType) {
     case 'carbohydrates':
       nutrient = createHexagon(500, 500, 15);
-      // nutrient = Matter.Bodies.polygon(x, y, 6, 20, {
-      //   render: {
-      //     fillStyle: 'blue',
-      //   },
-      // });
       break;
     case 'proteins':
       nutrient = Matter.Bodies.circle(x, y, 20, {
