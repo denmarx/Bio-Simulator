@@ -5,7 +5,7 @@ import { useCanvasSetup } from '../../hooks/useCanvasSetup';
 // Water engine
 const Water = ({ world, engine, tempTitle, startTemp, tempUnit, phTitle, startPh, temperature }) => {
   const { canvasRef, containerRef } = useCanvasSetup(engine, world);
-  useWaterParticles(world, canvasRef, temperature);
+  // useWaterParticles(world, canvasRef, temperature);
 
   return (
     <div className='waterContainer' ref={containerRef}>

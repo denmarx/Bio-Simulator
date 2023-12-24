@@ -5,13 +5,15 @@ import SimulationInfo from './StomachSimulationInfo';
 import spawnNutrients from '../utils/spawnNutrients';
 import spawnEnzyme from '../utils/spawnEnzymes';
 import '../styles/App.css';
-import Matter from 'matter-js';
+import Matter, { use } from 'matter-js';
 
 const StomachSimulation = () => {
   const [engine] = useState(Matter.Engine.create());
   const [world] = useState(engine.world);
   const [temp, setTemp] = useState(20);
   const [ph, setPh] = useState(7);
+  const [nutrients, setNutrients] = useState([]);
+  const [enzymes, setEnzymes] = useState([]);
 
   useEffect(() => {
     const runner = Matter.Runner.create();
@@ -20,12 +22,53 @@ const StomachSimulation = () => {
   }, [engine]);
 
   const handleNutrientAdd = (nutrientType) => {
-    spawnNutrients(nutrientType, 250, 250, world);
+   const newNutrient = spawnNutrients(nutrientType, 250, 250, world);
+    setNutrients(prev => [...prev, newNutrient]);
   };
 
-  const handleEnzymeAdd = (enzymeType) => {
-    spawnEnzyme(enzymeType, 300, 300, world);
+  const handleEnzymeAdd = (enzymeType, targetType) => {
+    const newEnzyme = spawnEnzyme(enzymeType, 300, 300, world, targetType);
+    setEnzymes(prev => [...prev, newEnzyme]);
   };
+
+  const seekTarget = (enzyme, target, forceMagnitude = 0.005) => {
+    const direction = Matter.Vector.sub(target.position, enzyme.position);
+    const force = Matter.Vector.mult(Matter.Vector.normalise(direction), forceMagnitude);
+    Matter.Body.applyForce(enzyme, enzyme.position, force);
+}
+
+  const findNearestNutrient = (enzyme) => {
+    let nearestNutrient = null;
+    let minDistance = Infinity;
+    
+    nutrients.forEach(nutrient => {
+      if (nutrient.nutrientType === enzyme.targetType) {
+        const distance = Matter.Vector.magnitude(Matter.Vector.sub(enzyme.position, nutrient.position));
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestNutrient = nutrient;
+        }
+      }
+    });
+
+    return nearestNutrient;
+  }
+
+  const updateEnzymes = () => {
+    enzymes.forEach(enzyme => {
+      const targetNutrient = findNearestNutrient(enzyme);
+      if (targetNutrient) {
+        seekTarget(enzyme, targetNutrient);
+      }
+    });
+  }
+
+  useEffect (() => {
+    const interval = setInterval(() => {
+      updateEnzymes();
+    }, 100);
+    return () => clearInterval(interval);
+  }, [enzymes, nutrients]);
 
   return (
     <div className='App'>

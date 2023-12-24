@@ -15,7 +15,7 @@ const SimulationControls = ({ temp, ph, onTempChange, onPhChange, onNutrientAdd,
       <button className='button' onClick={() => onNutrientAdd('lipids')}>
         Add Lipids
       </button>
-      <button className='button' onClick={() => onEnzymeAdd('enzyme')}>
+      <button className='button' onClick={() => onEnzymeAdd('enzyme', "carbohydrates")}>
         Create Enzyme
       </button>
     </div>

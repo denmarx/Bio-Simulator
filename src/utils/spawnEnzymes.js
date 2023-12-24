@@ -1,6 +1,6 @@
 import Matter from 'matter-js';
 
-const spawnEnzyme = (enzymeType, x, y, world) => {
+const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
   let enzyme;
 
   switch (enzymeType) {
@@ -14,7 +14,10 @@ const spawnEnzyme = (enzymeType, x, y, world) => {
     default:
       break;
   }
+  enzyme.targetType = targetType;
   Matter.World.add(world, enzyme);
+  console.log(enzyme)
+  return enzyme;
 };
 
 export default spawnEnzyme;

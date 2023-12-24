@@ -4,6 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
+README.md
+.gitignore
+.vscode
+class_daigram.drawio
 
 # testing
 /coverage

@@ -37,7 +37,10 @@ const spawnNutrients = (nutrientType, x, y, world) => {
     default:
       break;
   }
+   nutrient.nutrientType = nutrientType;
   Matter.World.add(world, nutrient);
+  console.log(nutrient)
+  return nutrient;
 };
 
 export default spawnNutrients;
