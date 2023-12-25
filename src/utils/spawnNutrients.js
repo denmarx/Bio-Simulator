@@ -17,7 +17,7 @@ const spawnNutrients = (nutrientType, x, y, world) => {
 
   switch (nutrientType) {
     case 'carbohydrates':
-      nutrient = createHexagon(500, 500, 15);
+      nutrient = createHexagon(x, y, 15);
       break;
     case 'proteins':
       nutrient = Matter.Bodies.circle(x, y, 20, {

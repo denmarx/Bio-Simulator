@@ -9,11 +9,13 @@ const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
         render: {
           fillStyle: 'orange',
         },
+        isEnzyme: true,
       });
       break;
     default:
       break;
   }
+
   enzyme.targetType = targetType;
   Matter.World.add(world, enzyme);
   console.log(enzyme)
