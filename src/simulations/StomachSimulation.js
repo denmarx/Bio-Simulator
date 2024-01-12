@@ -6,6 +6,7 @@ import spawnNutrients from '../utils/spawnNutrients';
 import spawnEnzyme from '../utils/spawnEnzymes';
 import '../styles/App.css';
 import Matter, { use } from 'matter-js';
+import generateMultipleNutrients from '../utils/generateMultipleNutrients';
 
 const StomachSimulation = () => {
   const [engine] = useState(Matter.Engine.create());
@@ -22,8 +23,10 @@ const StomachSimulation = () => {
   }, [engine]);
 
   const handleNutrientAdd = (nutrientType) => {
-   const newNutrient = spawnNutrients(nutrientType, Math.floor(Math.random()*800), Math.floor(Math.random()*600) , world);
-    setNutrients(prev => [...prev, newNutrient]);
+  //  const newNutrient = spawnNutrients(nutrientType, Math.floor(Math.random()*800), Math.floor(Math.random()*600), world);
+  const newNutrient = generateMultipleNutrients(nutrientType, world, 15)
+    
+    setNutrients(prev => [...prev, ...newNutrient]);
   };
 
   const handleEnzymeAdd = (enzymeType, targetType) => {

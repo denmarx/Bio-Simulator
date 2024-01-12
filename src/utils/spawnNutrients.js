@@ -26,6 +26,7 @@ const spawnNutrients = (nutrientType, x, y, world) => {
         },
       });
       break;
+    
     case 'lipids':
       nutrient = Matter.Bodies.rectangle(x, y, 40, 20, {
         render: {
@@ -37,10 +38,10 @@ const spawnNutrients = (nutrientType, x, y, world) => {
     default:
       break;
   }
-   nutrient.nutrientType = nutrientType;
+  nutrient.nutrientType = nutrientType;
   Matter.World.add(world, nutrient);
-  console.log(nutrient)
   return nutrient;
+
 };
 
 export default spawnNutrients;
