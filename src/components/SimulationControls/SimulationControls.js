@@ -7,7 +7,7 @@ const SimulationControls = ({ temp, ph, onTempChange, onPhChange, onNutrientAdd,
     <div className='controls-container'>
       <Slider label='Temperature' min={-5} max={37} value={temp} onChange={onTempChange} />
       <Slider label='pH' min={-1} max={15} value={ph} onChange={onPhChange} />
-      <Buttons id='carbohydrates' label='button' onClick={() => onNutrientAdd('carbohydrates')} />
+      <Buttons onNutrientAdd={onNutrientAdd} />
       {/* <button className='button' onClick={() => onNutrientAdd('carbohydrates')}>
         Add Carbohydrates
       </button>

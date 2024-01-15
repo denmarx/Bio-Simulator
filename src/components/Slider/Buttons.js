@@ -1,15 +1,19 @@
 import React from 'react';
 
 // Slider is arrow function which takes one object with properties
-const Buttons = ({ id, className, onClick }) => {
-  const handleClick = () => {
-    onClick(id);
-  };
-
+const Buttons = ({ onNutrientAdd }) => {
   return (
-    <div className='button'>
-      <button id={id} className={className} onClick={handleClick} />
-    </div>
+    <>
+      <button id='carbohydrates' onClick={() => onNutrientAdd('carbohydrates')}>
+        Add Carbohydrates
+      </button>
+      <button id='proteins' className='button' onClick={() => onNutrientAdd('proteins')}>
+        Add Carbohydrates
+      </button>
+      <button id='lipids' className='button' onClick={() => onNutrientAdd('lipids')}>
+        Add Carbohydrates
+      </button>
+    </>
   );
 };
 
