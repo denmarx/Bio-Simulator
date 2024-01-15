@@ -1,12 +1,14 @@
 import React from 'react';
 import Slider from '../Slider/Slider';
+import Buttons from '../Slider/Buttons';
 
 const SimulationControls = ({ temp, ph, onTempChange, onPhChange, onNutrientAdd, onEnzymeAdd }) => {
   return (
     <div className='controls-container'>
       <Slider label='Temperature' min={-5} max={37} value={temp} onChange={onTempChange} />
       <Slider label='pH' min={-1} max={15} value={ph} onChange={onPhChange} />
-      <button className='button' onClick={() => onNutrientAdd('carbohydrates')}>
+      <Buttons id='carbohydrates' label='button' onClick={() => onNutrientAdd('carbohydrates')} />
+      {/* <button className='button' onClick={() => onNutrientAdd('carbohydrates')}>
         Add Carbohydrates
       </button>
       <button className='button' onClick={() => onNutrientAdd('proteins')}>
@@ -23,7 +25,7 @@ const SimulationControls = ({ temp, ph, onTempChange, onPhChange, onNutrientAdd,
       </button>
       <button className='button' onClick={() => onEnzymeAdd('lipase', "lipids")}>
         Create Lipase
-      </button>
+      </button> */}
     </div>
   );
 };
