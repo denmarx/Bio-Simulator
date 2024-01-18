@@ -11,7 +11,7 @@ const StomachSimulation = () => {
   const [engine] = useState(Matter.Engine.create());
   const [world] = useState(engine.world);
   const [temp, setTemp] = useState(20);
-  const [ph, setPh] = useState(7);
+  const [pH, setpH] = useState(7);
   const [nutrients, setNutrients] = useState([]);
   const [enzymes, setEnzymes] = useState([]);
 
@@ -107,16 +107,17 @@ const StomachSimulation = () => {
           tempTitle='Temperature'
           startTemp={temp}
           tempUnit='°C'
-          phTitle='pH'
-          startPh={ph}
+          pHTitle='pH'
+          startpH={pH}
           temperature={temp}
+          pH={pH}
         />
       </div>
       <SimulationControls
         temp={temp}
-        ph={ph}
+        pH={pH}
         onTempChange={setTemp}
-        onPhChange={setPh}
+        onpHChange={setpH}
         onNutrientAdd={handleNutrientAdd}
         onEnzymeAdd={handleEnzymeAdd}
       />
