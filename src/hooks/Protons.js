@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Matter from 'matter-js';
-// const NUM_PROTONS = 20;
 
 const useProtons = (world, canvasRef, temperature, pH) => {
   const [protons, setProtons] = useState([]);
