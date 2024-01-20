@@ -1,9 +1,10 @@
 import { useRef, useEffect } from 'react';
 import Matter from 'matter-js';
 
-export const useCanvasSetup = (engine, world, options = {}) => {
-  const canvasRef = useRef(null);
+export const useCanvasSetup = (engine, world, canvasRef, options = {}) => {
+  // const canvasRef = useRef(null);
   const containerRef = useRef(null);
+  const categoryBorders = 0x0006;
 
   // Function to set up the canvas borders
   const setupCanvasBorders = () => {
@@ -16,14 +17,25 @@ export const useCanvasSetup = (engine, world, options = {}) => {
         canvasRef.current.height - 10,
         canvasRef.current.width,
         borderThickness,
-        { isStatic: true }
+        {
+          collisionFilter: {
+            category: categoryBorders,
+          },
+          isStatic: true,
+        }
       ),
       // Upper Border
       Matter.Bodies.rectangle(canvasRef.current.width / 2, 0, canvasRef.current.width, borderThickness, {
+        collisionFilter: {
+          category: categoryBorders,
+        },
         isStatic: true,
       }),
       // Left Border
       Matter.Bodies.rectangle(10, canvasRef.current.height / 2, borderThickness, canvasRef.current.height, {
+        collisionFilter: {
+          category: categoryBorders,
+        },
         isStatic: true,
       }),
       // Right Border
@@ -32,7 +44,12 @@ export const useCanvasSetup = (engine, world, options = {}) => {
         canvasRef.current.height / 2,
         borderThickness,
         canvasRef.current.height,
-        { isStatic: true }
+        {
+          collisionFilter: {
+            category: categoryBorders,
+          },
+          isStatic: true,
+        }
       ),
     ];
 
@@ -40,11 +57,14 @@ export const useCanvasSetup = (engine, world, options = {}) => {
   };
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (!canvasRef || !canvasRef.current) {
+      console.log('Canvas ref is not available in useCanvasSetup.');
+      return;
+    }
 
     const render = Matter.Render.create({
       canvas: canvasRef.current,
-      element: containerRef.current,
+      // element: containerRef.current,
       engine: engine,
       options: {
         wireframes: options.wireframes || false,
@@ -58,7 +78,7 @@ export const useCanvasSetup = (engine, world, options = {}) => {
       Matter.Render.stop(render);
       Matter.Engine.clear(engine);
     };
-  }, [engine, world, options.wireframes]);
+  }, [engine, world, canvasRef, options.wireframes]);
 
-  return { canvasRef, containerRef };
+  return { containerRef };
 };

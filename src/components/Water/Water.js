@@ -4,8 +4,8 @@ import useProtons from '../../hooks/Protons';
 import { useCanvasSetup } from '../../hooks/useCanvasSetup';
 
 // Water engine
-const Water = ({ world, engine, tempTitle, startTemp, tempUnit, pHTitle, startpH, temperature, pH }) => {
-  const { canvasRef, containerRef } = useCanvasSetup(engine, world);
+const Water = ({ canvasRef, world, engine, tempTitle, startTemp, tempUnit, pHTitle, startpH, temperature, pH }) => {
+  const { containerRef } = useCanvasSetup(engine, world, canvasRef);
   useWaterParticles(world, canvasRef, temperature);
   useProtons(world, canvasRef, temperature, pH);
 

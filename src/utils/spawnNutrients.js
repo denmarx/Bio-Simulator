@@ -2,6 +2,8 @@ import Matter from 'matter-js';
 
 const spawnNutrients = (nutrientType, x, y, world) => {
   let nutrient;
+  const categoryOther = 0x0004;
+  const categoryBorders = 0x0006;
 
   const createHexagon = (x, y, sideLength) => {
     const vertices = [];
@@ -12,7 +14,12 @@ const spawnNutrients = (nutrientType, x, y, world) => {
       vertices.push({ x: vertexX * 2, y: vertexY });
     }
 
-    return Matter.Bodies.fromVertices(x, y, [vertices], {});
+    return Matter.Bodies.fromVertices(x, y, [vertices], {
+      collisionFilter: {
+        category: categoryOther,
+        mask: categoryOther | categoryBorders,
+      },
+    });
   };
 
   switch (nutrientType) {
@@ -21,14 +28,22 @@ const spawnNutrients = (nutrientType, x, y, world) => {
       break;
     case 'proteins':
       nutrient = Matter.Bodies.circle(x, y, 20, {
+        collisionFilter: {
+          category: categoryOther,
+          mask: categoryOther | categoryBorders,
+        },
         render: {
           fillStyle: 'red',
         },
       });
       break;
-    
+
     case 'lipids':
       nutrient = Matter.Bodies.rectangle(x, y, 40, 20, {
+        collisionFilter: {
+          category: categoryOther,
+          mask: categoryOther | categoryBorders,
+        },
         render: {
           fillStyle: 'green',
         },
@@ -41,7 +56,6 @@ const spawnNutrients = (nutrientType, x, y, world) => {
   nutrient.nutrientType = nutrientType;
   Matter.World.add(world, nutrient);
   return nutrient;
-
 };
 
 export default spawnNutrients;

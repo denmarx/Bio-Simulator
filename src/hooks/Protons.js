@@ -3,10 +3,12 @@ import Matter from 'matter-js';
 
 const useProtons = (world, canvasRef, temperature, pH) => {
   const [protons, setProtons] = useState([]);
+  const categoryWater = 0x0001;
+  const categoryProtons = 0x0002;
   const cacluateNumProtons = (pH) => {
-    if (pH < 7) return 40 + (7 - pH) * 5;
-    if (pH > 7) return Math.max(0, 40 - (pH - 7) * 5);
-    return 40;
+    if (pH < 7) return 60 + (7 - pH) * 5;
+    if (pH > 7) return Math.max(0, 60 - (pH - 7) * 5);
+    return 60;
   };
 
   const addProtons = (numProtons) => {
@@ -18,6 +20,10 @@ const useProtons = (world, canvasRef, temperature, pH) => {
         restitution: 1,
         friction: 0,
         frictionAir: 0,
+        collisionFilter: {
+          category: categoryProtons,
+          mask: categoryWater | categoryProtons,
+        },
         render: {
           fillStyle: 'red',
         },
@@ -43,15 +49,19 @@ const useProtons = (world, canvasRef, temperature, pH) => {
   }, [pH]);
 
   useEffect(() => {
-    const velocityScaleFactor = Math.max(0, temperature / 50);
-    protons.forEach((proton) => {
-      const direction = Math.random() * 9;
-      const velocity = {
-        x: Math.sin(direction) * 8 * velocityScaleFactor,
-        y: Math.cos(direction) * 8 * velocityScaleFactor,
-      };
-      Matter.Body.setVelocity(proton, velocity);
-    });
+    const applyVelocity = () => {
+      const velocityScaleFactor = temperature > 0 ? Math.max(0, temperature / 25) : 0;
+      protons.forEach((proton) => {
+        const direction = Math.random() * Math.PI * 2;
+        const velocity = {
+          x: Math.sin(direction) * velocityScaleFactor,
+          y: Math.cos(direction) * velocityScaleFactor,
+        };
+        Matter.Body.setVelocity(proton, velocity);
+      });
+    };
+    const interval = setInterval(applyVelocity, 100);
+    return () => clearInterval(interval);
   }, [temperature, protons]);
 
   return protons;

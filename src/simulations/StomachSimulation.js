@@ -7,13 +7,14 @@ import '../styles/App.css';
 import Matter from 'matter-js';
 import generateMultipleNutrients from '../utils/generateMultipleNutrients';
 
-const StomachSimulation = () => {
+const StomachSimulation = ({ canvasRef }) => {
   const [engine] = useState(Matter.Engine.create());
   const [world] = useState(engine.world);
   const [temp, setTemp] = useState(20);
   const [pH, setpH] = useState(7);
   const [nutrients, setNutrients] = useState([]);
   const [enzymes, setEnzymes] = useState([]);
+  // const { canvasRef } = useCanvasSetup();
 
   useEffect(() => {
     const runner = Matter.Runner.create();
@@ -22,9 +23,7 @@ const StomachSimulation = () => {
   }, [engine]);
 
   const handleNutrientAdd = (nutrientType) => {
-    //  const newNutrient = spawnNutrients(nutrientType, Math.floor(Math.random()*800), Math.floor(Math.random()*600), world);
-    const newNutrient = generateMultipleNutrients(nutrientType, world, 15);
-
+    const newNutrient = generateMultipleNutrients(nutrientType, world, 15, canvasRef);
     setNutrients((prev) => [...prev, ...newNutrient]);
   };
 
@@ -102,6 +101,7 @@ const StomachSimulation = () => {
     <div className='App'>
       <div className='centered-container'>
         <Water
+          canvasRef={canvasRef}
           world={world}
           engine={engine}
           tempTitle='Temperature'
