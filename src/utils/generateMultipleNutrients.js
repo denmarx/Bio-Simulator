@@ -1,4 +1,5 @@
 import spawnNutrients from './spawnNutrients';
+import useParticleVelocity from './applyVelocity';
 
 const generateMultipleNutrients = (nutrientType, world, count, canvasRef) => {
   const nutrients = [];

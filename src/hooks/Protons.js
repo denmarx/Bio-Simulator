@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Matter from 'matter-js';
+import useParticleVelocity from '../utils/applyVelocity';
 
 const useProtons = (world, canvasRef, temperature, pH) => {
   const [protons, setProtons] = useState([]);
@@ -48,23 +49,7 @@ const useProtons = (world, canvasRef, temperature, pH) => {
     addProtons(numProtons);
   }, [pH]);
 
-  useEffect(() => {
-    const applyVelocity = () => {
-      const velocityScaleFactor = temperature > 0 ? Math.max(0, temperature / 25) : 0;
-      protons.forEach((proton) => {
-        const direction = Math.random() * Math.PI * 2;
-        const velocity = {
-          x: Math.sin(direction) * velocityScaleFactor,
-          y: Math.cos(direction) * velocityScaleFactor,
-        };
-        Matter.Body.setVelocity(proton, velocity);
-      });
-    };
-    const interval = setInterval(applyVelocity, 100);
-    return () => clearInterval(interval);
-  }, [temperature, protons]);
-
-  return protons;
+  useParticleVelocity(temperature, protons);
 };
 
 export default useProtons;

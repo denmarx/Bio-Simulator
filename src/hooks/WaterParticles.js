@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Matter from 'matter-js';
+import useParticleVelocity from '../utils/applyVelocity';
 const NUM_WATER_PARTICLES = 200;
 
 const useWaterParticles = (world, canvasRef, temperature) => {
@@ -7,7 +8,6 @@ const useWaterParticles = (world, canvasRef, temperature) => {
   const categoryWater = 0x0001;
   const categoryProtons = 0x0002;
 
-  // particle creation, number,  physical properties
   const addWaterParticles = () => {
     let particleArray = [];
     for (let i = 0; i < NUM_WATER_PARTICLES; i++) {
@@ -32,32 +32,13 @@ const useWaterParticles = (world, canvasRef, temperature) => {
 
     setParticles(particleArray);
   };
+
   // adds particles during first initialization
   useEffect(() => {
     addWaterParticles();
   }, []);
-  //Hook w/ dependency array that gets triggered when temperature or particles array changes
-  useEffect(() => {
-    const applyVelocity = () => {
-      // sets particles speed based on temperature
-      const velocityScaleFactor = temperature > 0 ? Math.max(0, temperature / 25) : 0;
-      particles.forEach((particle) => {
-        // calculates angle of velocity vectors
-        const direction = Math.random() * Math.PI * 2;
-        const velocity = {
-          // cacluates velocity vectors dependent on temperature
-          x: Math.sin(direction) * velocityScaleFactor,
-          y: Math.cos(direction) * velocityScaleFactor,
-        };
-        Matter.Body.setVelocity(particle, velocity);
-      });
-    };
 
-    const interval = setInterval(applyVelocity, 100);
-    return () => clearInterval(interval);
-  }, [temperature, particles]);
-
-  return particles;
+  useParticleVelocity(temperature, particles);
 };
 
 export default useWaterParticles;
