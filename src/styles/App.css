@@ -1,23 +1,22 @@
-.App {
+.simulation-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 600px;
+  padding-top: 5%;
 }
 .centered-container {
   display: flex;
   align-items: center;
 }
 
-.side-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 2em;
+.waterContainer {
+  height: 600px;
 }
 
 .text-container p {
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   margin-bottom: 10px;
   border: 2px dashed black;
   height: 9em;
@@ -28,8 +27,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f1f1f1;
+  background-color: var(--navy);
   flex: 0 0 auto;
+  height: 100%;
 }
 
 .slider {
@@ -45,16 +45,4 @@
 
 .button {
   margin-top: 10px;
-}
-
-.canvas-container {
-  /* position: relative;
-  flex: 1; */
-}
-
-.waterCanvas {
-  margin: 0 auto;
-  display: block;
-  border: 1px solid #ccc;
-  height: 100%;
 }

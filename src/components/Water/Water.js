@@ -2,6 +2,7 @@ import React from 'react';
 import useWaterParticles from '../../hooks/WaterParticles';
 import useProtons from '../../hooks/Protons';
 import { useCanvasSetup } from '../../hooks/useCanvasSetup';
+import '../../styles/App.css';
 
 // Water engine
 const Water = ({ canvasRef, world, engine, tempTitle, startTemp, tempUnit, pHTitle, startpH, temperature, pH }) => {
@@ -11,9 +12,9 @@ const Water = ({ canvasRef, world, engine, tempTitle, startTemp, tempUnit, pHTit
 
   return (
     <div className='waterContainer' ref={containerRef}>
-      <div className='valueDisplay'>
+      {/* <div className='valueDisplay'>
         {tempTitle} {startTemp} {tempUnit} {pHTitle} {startpH}
-      </div>
+      </div> */}
       <canvas className='waterWorld' ref={canvasRef} />
     </div>
   );

@@ -6,52 +6,44 @@ export const useCanvasSetup = (engine, world, canvasRef, options = {}) => {
   const containerRef = useRef(null);
   const categoryBorders = 0x0006;
 
+  const drawCanvasBackground = () => {
+    const ctx = canvasRef.current.getContext('2d');
+    ctx.fillStyle = '#0a192f';
+    ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  };
+
   // Function to set up the canvas borders
   const setupCanvasBorders = () => {
-    const borderThickness = 40;
+    const borderThickness = 1;
+    const width = canvasRef.current.width;
+    const height = canvasRef.current.height;
 
-    const borders = [
-      // Ground
-      Matter.Bodies.rectangle(
-        canvasRef.current.width / 2,
-        canvasRef.current.height - 10,
-        canvasRef.current.width,
-        borderThickness,
-        {
-          collisionFilter: {
-            category: categoryBorders,
-          },
-          isStatic: true,
-        }
-      ),
-      // Upper Border
-      Matter.Bodies.rectangle(canvasRef.current.width / 2, 0, canvasRef.current.width, borderThickness, {
-        collisionFilter: {
-          category: categoryBorders,
-        },
-        isStatic: true,
-      }),
-      // Left Border
-      Matter.Bodies.rectangle(10, canvasRef.current.height / 2, borderThickness, canvasRef.current.height, {
-        collisionFilter: {
-          category: categoryBorders,
-        },
-        isStatic: true,
-      }),
-      // Right Border
-      Matter.Bodies.rectangle(
-        canvasRef.current.width - 10,
-        canvasRef.current.height / 2,
-        borderThickness,
-        canvasRef.current.height,
-        {
-          collisionFilter: {
-            category: categoryBorders,
-          },
-          isStatic: true,
-        }
-      ),
-    ];
+    const ground = Matter.Bodies.rectangle(width / 2, height - borderThickness / 2, width, borderThickness, {
+      collisionFilter: {
+        category: categoryBorders,
+      },
+      isStatic: true,
+    });
+    const ceiling = Matter.Bodies.rectangle(width / 2, borderThickness / 2, width, borderThickness, {
+      collisionFilter: {
+        category: categoryBorders,
+      },
+      isStatic: true,
+    });
+    const leftWall = Matter.Bodies.rectangle(borderThickness / 2, height / 2, borderThickness, height, {
+      collisionFilter: {
+        category: categoryBorders,
+      },
+      isStatic: true,
+    });
+    const rightWall = Matter.Bodies.rectangle(width - borderThickness / 2, height / 2, borderThickness, height, {
+      collisionFilter: {
+        category: categoryBorders,
+      },
+      isStatic: true,
+    });
+
+    const borders = [ground, ceiling, leftWall, rightWall];
 
     borders.forEach((body) => Matter.World.add(world, body));
   };
@@ -71,7 +63,11 @@ export const useCanvasSetup = (engine, world, canvasRef, options = {}) => {
       },
     });
 
+    drawCanvasBackground();
     setupCanvasBorders();
+
+    render.canvas.style.background = '#0a192f';
+
     Matter.Render.run(render);
 
     return () => {

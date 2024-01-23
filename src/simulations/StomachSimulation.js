@@ -41,21 +41,20 @@ const StomachSimulation = ({ canvasRef }) => {
   useCollisionHandler(engine, world, nutrients, setNutrients);
 
   return (
-    <div className='App'>
-      <div className='centered-container'>
-        <Water
-          canvasRef={canvasRef}
-          world={world}
-          engine={engine}
-          tempTitle='Temperature'
-          startTemp={temp}
-          tempUnit='°C'
-          pHTitle='pH'
-          startpH={pH}
-          temperature={temp}
-          pH={pH}
-        />
-      </div>
+    <div className='simulation-container'>
+      <Water
+        canvasRef={canvasRef}
+        world={world}
+        engine={engine}
+        tempTitle='Temperature'
+        startTemp={temp}
+        tempUnit='°C'
+        pHTitle='pH'
+        startpH={pH}
+        temperature={temp}
+        pH={pH}
+      />
+
       <SimulationControls
         temp={temp}
         pH={pH}
@@ -64,7 +63,7 @@ const StomachSimulation = ({ canvasRef }) => {
         onNutrientAdd={handleNutrientAdd}
         onEnzymeAdd={handleEnzymeAdd}
       />
-      <SimulationInfo />
+      {/* <SimulationInfo /> */}
     </div>
   );
 };
