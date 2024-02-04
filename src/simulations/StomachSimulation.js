@@ -36,7 +36,7 @@ const StomachSimulation = ({ canvasRef }) => {
 
   useParticleVelocity(temp, nutrients);
 
-  useEnzymes(enzymes, nutrients);
+  useEnzymes(enzymes, nutrients, pH);
 
   useCollisionHandler(engine, world, nutrients, setNutrients);
 

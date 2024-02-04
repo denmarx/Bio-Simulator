@@ -1,7 +1,7 @@
 import Matter from 'matter-js';
 import { useEffect } from 'react';
 
-const useEnzymes = (enzymes, nutrients) => {
+const useEnzymes = (enzymes, nutrients, pH) => {
   const seekTarget = (enzyme, target, forceMagnitude = 0.005) => {
     const direction = Matter.Vector.sub(target.position, enzyme.position);
     const force = Matter.Vector.mult(Matter.Vector.normalise(direction), forceMagnitude);
@@ -27,9 +27,14 @@ const useEnzymes = (enzymes, nutrients) => {
 
   const updateEnzymes = () => {
     enzymes.forEach((enzyme) => {
-      const targetNutrient = findNearestNutrient(enzyme);
-      if (targetNutrient) {
-        seekTarget(enzyme, targetNutrient);
+      if (enzyme.preferredpH.includes(pH)) {
+        const targetNutrient = findNearestNutrient(enzyme);
+        if (targetNutrient) {
+          seekTarget(enzyme, targetNutrient);
+        }
+      } else {
+        alert('false');
+        console.log(enzyme.preferredpH);
       }
     });
   };

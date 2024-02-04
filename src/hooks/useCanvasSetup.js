@@ -6,12 +6,6 @@ export const useCanvasSetup = (engine, world, canvasRef, options = {}) => {
   const containerRef = useRef(null);
   const categoryBorders = 0x0006;
 
-  const drawCanvasBackground = () => {
-    const ctx = canvasRef.current.getContext('2d');
-    ctx.fillStyle = '#0a192f';
-    ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-  };
-
   // Function to set up the canvas borders
   const setupCanvasBorders = () => {
     const borderThickness = 1;
@@ -63,10 +57,7 @@ export const useCanvasSetup = (engine, world, canvasRef, options = {}) => {
       },
     });
 
-    drawCanvasBackground();
     setupCanvasBorders();
-
-    render.canvas.style.background = '#0a192f';
 
     Matter.Render.run(render);
 

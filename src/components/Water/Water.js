@@ -3,6 +3,7 @@ import useWaterParticles from '../../hooks/WaterParticles';
 import useProtons from '../../hooks/Protons';
 import { useCanvasSetup } from '../../hooks/useCanvasSetup';
 import '../../styles/App.css';
+import '../../index.css';
 
 // Water engine
 const Water = ({ canvasRef, world, engine, tempTitle, startTemp, tempUnit, pHTitle, startpH, temperature, pH }) => {

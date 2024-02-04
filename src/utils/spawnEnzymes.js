@@ -15,6 +15,7 @@ const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
           fillStyle: 'orange',
         },
         isEnzyme: true,
+        preferredpH: [-1, 0, 1, 2, 3, 4, 5, 6, 7],
       });
       break;
     case 'protease':
@@ -27,6 +28,7 @@ const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
           fillStyle: 'green',
         },
         isEnzyme: true,
+        preferredpH: [-1, 0, 1, 2, 3, 4, 5, 6, 7],
       });
       break;
     case 'lipase':
@@ -39,6 +41,7 @@ const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
           fillStyle: 'orange',
         },
         isEnzyme: true,
+        preferredpH: [8, 9, 10, 11, 12, 13, 14],
       });
       break;
     default:
