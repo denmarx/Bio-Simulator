@@ -1,3 +1,5 @@
+// spawnEnzyme.js
+
 import Matter from 'matter-js';
 
 const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
@@ -15,7 +17,8 @@ const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
           fillStyle: 'orange',
         },
         isEnzyme: true,
-        preferredpH: [-1, 0, 1, 2, 3, 4, 5, 6, 7],
+        enzymeType: 'amylase', 
+        // preferredpH: [-1, 0, 1, 2, 3, 4, 5, 6, 7],
       });
       break;
     case 'protease':
@@ -28,8 +31,10 @@ const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
           fillStyle: 'green',
         },
         isEnzyme: true,
-        preferredpH: [-1, 0, 1, 2, 3, 4, 5, 6, 7],
+        enzymeType: 'protease', 
+        // preferredpH: [-1, 0, 1, 2, 3, 4, 5, 6, 7],
       });
+
       break;
     case 'lipase':
       enzyme = Matter.Bodies.polygon(x, y, 10, 40, {
@@ -41,7 +46,8 @@ const spawnEnzyme = (enzymeType, x, y, world, targetType) => {
           fillStyle: 'orange',
         },
         isEnzyme: true,
-        preferredpH: [8, 9, 10, 11, 12, 13, 14],
+        enzymeType: 'lipase', // Assign enzyme type directly here
+        // preferredpH: [8, 9, 10, 11, 12, 13, 14],
       });
       break;
     default:

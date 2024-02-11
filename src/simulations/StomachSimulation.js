@@ -36,7 +36,18 @@ const StomachSimulation = ({ canvasRef }) => {
 
   useParticleVelocity(temp, nutrients);
 
-  useEnzymes(enzymes, nutrients, pH);
+  const tempRanges = {
+    amylase: { min: 1, med: 20, max: 36, opt: 37 },
+    protease: { min: 1, med: 20, max: 36, opt: 37 },
+    lipase: { min: 1, med: 20, max: 36, opt: 37 },
+  };
+  const pHRanges = {
+    amylase: { min: 0, med: 4, max: 8, alk: 14 },
+    protease: { min: 0, med: 4, max: 8, alk: 14 },
+    lipase: { min: 0, med: 4, max: 8, alk: 14 },
+  };
+
+  useEnzymes(enzymes, nutrients, pH, temp, tempRanges, pHRanges);
 
   useCollisionHandler(engine, world, nutrients, setNutrients);
 
@@ -58,12 +69,14 @@ const StomachSimulation = ({ canvasRef }) => {
       <SimulationControls
         temp={temp}
         pH={pH}
+        enzymes={enzymes}
         onTempChange={setTemp}
         onpHChange={setpH}
         onNutrientAdd={handleNutrientAdd}
         onEnzymeAdd={handleEnzymeAdd}
+        tempRanges={tempRanges}
+        pHRanges={pHRanges}
       />
-      {/* <SimulationInfo /> */}
     </div>
   );
 };
