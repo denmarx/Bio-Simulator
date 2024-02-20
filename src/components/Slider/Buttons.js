@@ -3,8 +3,8 @@ import React from 'react';
 // Slider is arrow function which takes one object with properties
 const Buttons = ({ onNutrientAdd, onEnzymeAdd }) => {
   return (
-    <>
-      <button id='carbohydrates' onClick={() => onNutrientAdd('carbohydrates')}>
+    <div className='button-controls'>
+      <button id='carbohydrates' className='button' onClick={() => onNutrientAdd('carbohydrates')}>
         Add Carbohydrates
       </button>
       <button id='proteins' className='button' onClick={() => onNutrientAdd('proteins')}>
@@ -22,7 +22,7 @@ const Buttons = ({ onNutrientAdd, onEnzymeAdd }) => {
       <button id='lipase' className='button' onClick={() => onEnzymeAdd('lipase', 'lipids')}>
         Add Lipase
       </button>
-    </>
+    </div>
   );
 };
 

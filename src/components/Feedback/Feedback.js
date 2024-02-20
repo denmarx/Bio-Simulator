@@ -45,15 +45,25 @@ const Feedback = ({ pH, temp, enzymes, tempRanges, pHRanges }) => {
 
   return (
     <div className='feedback'>
-      <h2>Feedback</h2>
+      <div>
+        <h2 className='heading'>Enzyme Monitor</h2>
+      </div>
       {/* Render feedback for each unique enzyme type */}
       {uniqueEnzymeTypes.map((enzymeType, index) => {
         const optimization = checkOptimization(enzymeType);
+        const capitalizedEnzymeType = enzymeType.charAt(0).toUpperCase() + enzymeType.slice(1);
+        let enzymeDescription = '';
+        if (enzymeType === 'protease') {
+          enzymeDescription =
+            'Pepsin is a stomach enzyme that breaks down proteins into smaller peptides. It works best in the highly acidic environment of the stomach, with an optimum pH range of around 1.5 to 2.0.';
+        }
+
         return (
-          <div key={index}>
-            <p>{enzymeType}:</p>
+          <div key={index} className={enzymeType}>
+            <p>{capitalizedEnzymeType} </p>
             <p>Temperature: {optimization.temp}</p>
             <p>pH: {optimization.pH}</p>
+            <p> {enzymeDescription}</p>
           </div>
         );
       })}

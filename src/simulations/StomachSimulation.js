@@ -9,6 +9,7 @@ import generateMultipleNutrients from '../utils/generateMultipleNutrients';
 import useEnzymes from '../hooks/Enzymes';
 import useCollisionHandler from '../utils/useCollisionHandler';
 import useParticleVelocity from '../utils/applyVelocity';
+import Legend from '../components/Legend/Legend';
 
 const StomachSimulation = ({ canvasRef }) => {
   const [engine] = useState(Matter.Engine.create());
@@ -17,6 +18,12 @@ const StomachSimulation = ({ canvasRef }) => {
   const [pH, setpH] = useState(7);
   const [nutrients, setNutrients] = useState([]);
   const [enzymes, setEnzymes] = useState([]);
+  const [showCarbohydrates, setShowCarbohydrates] = useState(false);
+  const [showProteins, setShowProteins] = useState(false);
+  const [showLipids, setShowLipids] = useState(false);
+  const [showAmylase, setShowAmylase] = useState(false);
+  const [showProtease, setShowProtease] = useState(false);
+  const [showLipase, setShowLipase] = useState(false);
 
   useEffect(() => {
     const runner = Matter.Runner.create();
@@ -27,6 +34,15 @@ const StomachSimulation = ({ canvasRef }) => {
   const handleNutrientAdd = (nutrientType) => {
     const newNutrient = generateMultipleNutrients(nutrientType, world, 15, canvasRef);
     setNutrients((prev) => [...prev, ...newNutrient]);
+    if (nutrientType === 'carbohydrates') {
+      setShowCarbohydrates(true);
+    }
+    if (nutrientType === 'proteins') {
+      setShowProteins(true);
+    }
+    if (nutrientType === 'lipids') {
+      setShowLipids(true);
+    }
   };
 
   const handleEnzymeAdd = (enzymeType, targetType) => {
@@ -77,6 +93,8 @@ const StomachSimulation = ({ canvasRef }) => {
         tempRanges={tempRanges}
         pHRanges={pHRanges}
       />
+      <Legend showCarbohydrates={showCarbohydrates} showProteins={showProteins} showLipids={showLipids} />
+      <SimulationInfo pH={pH} temp={temp} enzymes={enzymes} tempRanges={tempRanges} pHRanges={pHRanges} />
     </div>
   );
 };

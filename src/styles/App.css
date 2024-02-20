@@ -1,43 +1,188 @@
 .app-container {
-  display: flex;
-  flex-direction: column;
-  height: 600px;
+  height: 800px;
   max-width: fit-content;
+  text-align: center;
+}
+
+.app-container:first-child {
+  color: var(--green);
+  padding-bottom: 20px;
 }
 
 .simulation-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
   height: 100%;
   max-width: 100%;
 }
 
-.text-container {
-  color: white;
-  max-width: 100%;
-  width: 100%;
+.legend-container {
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto auto auto auto;
+  grid-row: 1 / 3;
+  height: 100%;
+  width: 400px;
+  background-color: var(--navy);
+  border-style: solid;
+  border-color: var(--lightest-navy);
+}
+
+.legend-container > h2 {
+  margin: auto;
+  padding: 1rem 0;
+}
+
+.legend-div {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  align-items: center;
+}
+
+.legend-div > p {
+  padding-right: 0.8em;
+  color: var(--lightest-slate);
+}
+
+.legend-water-particle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: blue;
+  margin-left: 0.5em;
+}
+
+.legend-proton-particle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 0.8em;
+}
+
+.legend-protein-particle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 0.5em;
+}
+
+.legend-lipid-particle {
+  width: 30px;
+  height: 15px;
+  background-color: green;
+  margin-left: 0.5em;
+}
+
+.legend-protein-particle:hover {
 }
 
 .controls-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-row: -3 / -1;
+  width: 250px;
+  grid-template-rows: 0.1fr 0.1fr 0.5fr;
   background-color: var(--navy);
   color: var(--green);
   height: 100%;
+  border-style: solid;
+  border-color: var(--lightest-navy);
+}
+
+/* Controls Heading */
+.controls-container > :first-child {
+  padding: 0.5em 0px 2em;
+  margin: auto;
+}
+
+.row {
+  padding-bottom: 0.4rem;
+}
+
+.row > label,
+span {
+  color: var(--lightest-slate);
+  font-size: 1.1rem;
+}
+
+.text-container {
+  grid-column: 2 / span 1;
+  grid-row-start: 2;
+  color: var(--green);
+  max-width: 100%;
+  width: 100%;
+  background-color: var(--navy);
+  border-style: solid;
+  border-color: var(--lightest-navy);
+  border-left: 0;
+  border-right: 0;
+  /* padding-top: 1.3rem; */
+}
+
+.legend-container {
+  color: var(--green);
+}
+
+.feedback {
+  display: grid;
+  grid-template-rows: 0.5fr 1fr;
+  height: 226px;
+  grid-template-columns: 267px 267px 267px;
+}
+
+.feedback > div:first-child {
+  height: 0px;
+  grid-column: 2;
+  justify-self: center;
+}
+
+.heading {
+  display: grid;
+  padding-left: 5px;
+}
+
+.feedback > div:not(:first-child) {
+  grid-row-end: -1;
+  gap: 100px;
+  color: var(--lightest-slate);
+  justify-self: center;
+}
+
+/* Enzyme name in Feedback screen */
+.feedback > div:not(:first-child) > p:first-child {
+  color: var(--green);
+  font-size: 1.2rem;
 }
 
 .slider {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.slider label {
-  margin-right: 10px;
-  font-weight: bold;
+.button-controls {
+  display: flex;
+  flex-direction: column;
 }
 
 .button {
-  margin-top: 10px;
+  text-decoration: none;
+  text-decoration-skip-ink: auto;
+  position: relative;
+  height: var(--tab-height);
+  padding: 5px 20px 5px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  color: var(--lightest-slate);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  white-space: nowrap;
+  border-radius: 0%;
+}
+
+.button:hover {
+  color: var(--green);
+  background-color: var(--light-navy);
 }

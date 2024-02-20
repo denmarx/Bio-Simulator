@@ -8,9 +8,11 @@ const Slider = ({ label, min, max, value, onChange }) => {
 
   return (
     <div className='slider'>
-      <label>{label}</label>
+      <div className='row'>
+        <label>{label}: </label>
+        <span>{value} </span>
+      </div>
       <input type='range' min={min} max={max} step={1} value={value} onChange={handleChange} />
-      <span>{value}</span>
     </div>
   );
 };

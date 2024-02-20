@@ -19,8 +19,8 @@ export default function App() {
 
   return (
     <div className='app-container'>
+      <h1>Enzyme Regulation Simulator</h1>
       <StomachSimulation canvasRef={canvasRef} />
-      <SimulationInfo />
     </div>
   );
 }
