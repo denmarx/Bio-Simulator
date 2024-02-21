@@ -50,8 +50,20 @@ const useEnzymes = (enzymes, nutrients, pH, temp, tempRanges, pHRanges) => {
                 ? 'denaturation'
                 : pH >= pHRange.med && pH < pHRange.max
                 ? 'non-optimal'
-                : pH >= pHRange.max
+                : pH >= pHRange.max && pH <= pHRange.alk
                 ? 'optimal'
+                : pH > pHRange.alk
+                ? 'denaturation'
+                : 'denaturation'
+              : enzyme.enzymeType === 'amylase'
+              ? pH >= pHRange.min && pH < pHRange.med
+                ? 'denaturation'
+                : pH >= pHRange.med && pH <= pHRange.max
+                ? 'non-optimal'
+                : pH > pHRange.max && pH <= pHRange.alk
+                ? 'optimal'
+                : pH > pHRange.alk
+                ? 'denaturation'
                 : 'denaturation'
               : pH >= pHRange.min && pH < pHRange.med
               ? 'optimal'

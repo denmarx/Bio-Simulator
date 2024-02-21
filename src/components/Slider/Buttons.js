@@ -16,8 +16,8 @@ const Buttons = ({ onNutrientAdd, onEnzymeAdd }) => {
       <button id='amylase' className='button' onClick={() => onEnzymeAdd('amylase', 'carbohydrates')}>
         Add Amylase
       </button>
-      <button id='protease' className='button' onClick={() => onEnzymeAdd('protease', 'proteins')}>
-        Add Protease
+      <button id='pepsin' className='button' onClick={() => onEnzymeAdd('pepsin', 'proteins')}>
+        Add Pepsin
       </button>
       <button id='lipase' className='button' onClick={() => onEnzymeAdd('lipase', 'lipids')}>
         Add Lipase

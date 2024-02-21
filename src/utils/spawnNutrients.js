@@ -15,6 +15,9 @@ const spawnNutrients = (nutrientType, x, y, world) => {
     }
 
     return Matter.Bodies.fromVertices(x, y, [vertices], {
+      render: {
+        fillStyle: 'orange',
+      },
       collisionFilter: {
         category: categoryOther,
         mask: categoryOther | categoryBorders,

@@ -54,13 +54,13 @@ const StomachSimulation = ({ canvasRef }) => {
 
   const tempRanges = {
     amylase: { min: 1, med: 20, max: 36, opt: 37 },
-    protease: { min: 1, med: 20, max: 36, opt: 37 },
+    pepsin: { min: 1, med: 20, max: 36, opt: 37 },
     lipase: { min: 1, med: 20, max: 36, opt: 37 },
   };
   const pHRanges = {
-    amylase: { min: 0, med: 4, max: 8, alk: 14 },
-    protease: { min: 0, med: 4, max: 8, alk: 14 },
-    lipase: { min: 0, med: 4, max: 8, alk: 14 },
+    amylase: { min: 0, med: 4, max: 5, alk: 8 },
+    pepsin: { min: 0, med: 4, max: 8, alk: 14 },
+    lipase: { min: 0, med: 5, max: 8, alk: 9 },
   };
 
   useEnzymes(enzymes, nutrients, pH, temp, tempRanges, pHRanges);

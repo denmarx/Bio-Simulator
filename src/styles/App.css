@@ -6,7 +6,11 @@
 
 .app-container:first-child {
   color: var(--green);
-  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.app-container > h1 {
+  padding-bottom: 1rem;
 }
 
 .simulation-container {
@@ -127,7 +131,7 @@ span {
 .feedback {
   display: grid;
   grid-template-rows: 0.5fr 1fr;
-  height: 226px;
+  height: 320px;
   grid-template-columns: 267px 267px 267px;
 }
 
@@ -144,7 +148,8 @@ span {
 
 .feedback > div:not(:first-child) {
   grid-row-end: -1;
-  gap: 100px;
+  /* gap: 100px; */
+  padding: 35px 10px 0;
   color: var(--lightest-slate);
   justify-self: center;
 }
@@ -153,6 +158,10 @@ span {
 .feedback > div:not(:first-child) > p:first-child {
   color: var(--green);
   font-size: 1.2rem;
+}
+
+.feedback > div:not(:first-child) > p:nth-child(3) {
+  padding-bottom: 10px;
 }
 
 .slider {
@@ -185,4 +194,10 @@ span {
 .button:hover {
   color: var(--green);
   background-color: var(--light-navy);
+}
+
+.version-number {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
