@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import Matter from 'matter-js';
 
-export const useCanvasSetup = (engine, world, canvasRef, options = {}) => {
+export const useCanvasSetup = (engine, world, canvasRef, desiredWidth, desiredHeight, options = {}) => {
   // const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const categoryBorders = 0x0006;
@@ -9,6 +9,8 @@ export const useCanvasSetup = (engine, world, canvasRef, options = {}) => {
   // Function to set up the canvas borders
   const setupCanvasBorders = () => {
     const borderThickness = 1;
+    canvasRef.current.width = desiredWidth;
+    canvasRef.current.height = desiredHeight;
     const width = canvasRef.current.width;
     const height = canvasRef.current.height;
 

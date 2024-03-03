@@ -4,13 +4,10 @@
   padding: 0;
 }
 
-#root {
-}
-
 :root {
   max-width: min-content;
   margin: auto;
-  padding-top: 2rem;
+  padding-top: 0.2rem;
 
   --dark-navy: #020c1b;
   --navy: #0a192f;

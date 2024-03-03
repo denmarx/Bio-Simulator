@@ -11,7 +11,7 @@ import useCollisionHandler from '../utils/useCollisionHandler';
 import useParticleVelocity from '../utils/applyVelocity';
 import Legend from '../components/Legend/Legend';
 
-const StomachSimulation = ({ canvasRef }) => {
+const StomachSimulation = ({ canvasRef, desiredWidth, desiredHeight }) => {
   const [engine] = useState(Matter.Engine.create());
   const [world] = useState(engine.world);
   const [temp, setTemp] = useState(20);
@@ -73,6 +73,8 @@ const StomachSimulation = ({ canvasRef }) => {
         canvasRef={canvasRef}
         world={world}
         engine={engine}
+        desiredWidth={desiredWidth}
+        desiredHeight={desiredHeight}
         tempTitle='Temperature'
         startTemp={temp}
         tempUnit='°C'

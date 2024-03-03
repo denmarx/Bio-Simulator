@@ -6,8 +6,8 @@ import '../../styles/App.css';
 import '../../index.css';
 
 // Water engine
-const Water = ({ canvasRef, world, engine, tempTitle, startTemp, tempUnit, pHTitle, startpH, temperature, pH }) => {
-  const { containerRef } = useCanvasSetup(engine, world, canvasRef);
+const Water = ({ canvasRef, world, engine, desiredWidth, desiredHeight, temperature, pH }) => {
+  const { containerRef } = useCanvasSetup(engine, world, canvasRef, desiredWidth, desiredHeight);
   useWaterParticles(world, canvasRef, temperature);
   useProtons(world, canvasRef, temperature, pH);
 
