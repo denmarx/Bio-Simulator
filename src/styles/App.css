@@ -24,6 +24,7 @@
 .waterWorld {
   background-color: transparent;
   mask-image: url('../assets/stomach.png');
+
   mask-size: contain;
   mask-repeat: no-repeat;
 }
